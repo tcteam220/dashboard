@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<!-- 配置自动扫描包 -->
+	<context:component-scan base-package="com.nfyg.controller" />
+
+	<!-- 注意这个配置，否则拦截器不起效果 -->
+	<mvc:annotation-driven />
+	<!-- <mvc:interceptors>
+		定义拦截器
+		<mvc:interceptor>
+			匹配的是url路径， 如果不配置或/**,将拦截所有的Controller
+			<mvc:mapping path="/**" />
+			不需要拦截的地址
+			<mvc:exclude-mapping path="/user/login.do" />
+			<bean class="com.nfyg.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	<!-- 用来处理json格式转换 -->
+	
+	 <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+            <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    
+     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    
+	 <bean id="handlerExceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="/auth/commons/error" />
+		<property name="exceptionAttribute" value="ex"></property>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">/exception/error</prop>
+				<prop key="java.lang.RuntimeException">/exception/error</prop>
+                <prop key="java.sql.SQLException">dbNotConnected</prop>
+                <prop key="java.net.ConnectException">dbNotConnected</prop>
+                <prop key="com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException">/exception/msg</prop>
+			</props>
+		</property>
+	</bean> 
+	<!-- <bean id="HSQL" class="org.springframework.jdbc.support.SQLErrorCodes">  
+    <property name="databaseProductName">  
+        <value>HSQL Database Engine</value>  
+    </property>  
+    <property name="badSqlGrammarCodes">  
+        <value>-22,-28</value>  
+    </property>  
+    <property name="duplicateKeyCodes">  
+        <value>-104</value>  
+    </property>  
+    <property name="dataIntegrityViolationCodes">  
+        <value>-9</value>  
+    </property>  
+    <property name="dataAccessResourceFailureCodes">  
+        <value>-80</value>  
+    </property>  
+</bean>   -->
+	
+
+	<!-- 配置国际化资源文件 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="i18n"></property>
+	</bean>
+
+	<!-- 配置视图解析器: 如何把 handler 方法返回值解析为实际的物理视图 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!--配置文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>10485760</value><!-- 10M -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	
+	
+	
+</beans>
