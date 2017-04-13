@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.tcteam.dashborad</groupId>
-    <artifactId>dashborad</artifactId>
+    <groupId>com.tcteam.dashboard</groupId>
+    <artifactId>dashboard</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>dashborad-core</artifactId>
-  <name>dashborad-core</name>
-  <description>dashborad的核心设计</description>
+  <artifactId>dashboard-core</artifactId>
+  <name>dashboard-core</name>
+  <description>dashboard的核心设计</description>
   
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

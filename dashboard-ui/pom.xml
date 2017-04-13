@@ -2,18 +2,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.tcteam.dashborad</groupId>
-		<artifactId>dashborad</artifactId>
+		<groupId>com.tcteam.dashboard</groupId>
+		<artifactId>dashboard</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>dashborad-ui</artifactId>
+	<artifactId>dashboard-ui</artifactId>
 	<packaging>war</packaging>
 
 <dependencies>
 
 <dependency>
-		<groupId>com.tcteam.dashborad</groupId>
-		<artifactId>dashborad-core</artifactId>
+		<groupId>com.tcteam.dashboard</groupId>
+		<artifactId>dashboard-core</artifactId>
 		<version>1.0</version>
 		<type>jar</type>
 		<scope>compile</scope>
@@ -29,7 +29,7 @@
 				<version>2.2</version>
 				<configuration>
 					<port>8080</port>
-					<path>/dashborad</path>
+					<path>/dashboard</path>
 					<uriEncoding>UTF-8</uriEncoding>
 					<server>tomcat8</server>
 				</configuration>
