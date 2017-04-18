@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:hdp="http://www.springframework.org/schema/hadoop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context.xsd 
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
+http://www.springframework.org/schema/websocket
+http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+   <hdp:configuration id="hadoopConfiguration">
+		fs.defaultFS=hdfs://10.254.20.126:9000/
+	</hdp:configuration>
+   <bean id="fileSystemFactoryBean" class="org.springframework.data.hadoop.fs.FileSystemFactoryBean">
+		<property name="configuration" ref="hadoopConfiguration" />
+	</bean>
+ 
+ <!-- 配置zookeeper的信息，远程连接hbase时使用 -->  
+    <hdp:configuration resources="classpath:hbase-site.xml" />  
+    <hdp:hbase-configuration configuration-ref="hadoopConfiguration" />  
+    <!-- 配置HbaseTemplate -->  
+    <bean id="hbaseTemplate" class="org.springframework.data.hadoop.hbase.HbaseTemplate">  
+        <property name="configuration" ref="hbaseConfiguration">  
+        </property>  
+    <property name="encoding" value="UTF-8"></property>  
+    </bean>  
+
+</beans>
