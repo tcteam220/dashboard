@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+
+
+	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"></property>
+		如果mppper类和xml文件不在同一个包下，就要配置mapplocations 指向xml文件存放的class路径
+		<property name="mapperLocations" value="classpath:com/papi/**/mapper/xml/*.xml"></property>
+	</bean>
+	MapperScannerConfigurer会自动扫描basePackage指定的包，找到映射接口类和映射XML文件 ,并进行注入
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.papi.**.mapper"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean> -->
+
+	<import resource="classpath*:spring/applicationContext-transaction.xml" />
+	<import resource="classpath*:spring/applicationContext-service.xml" />
+	<!--<import resource="classpath*:spring/applicationContext-security.xml" />-->
+</beans>

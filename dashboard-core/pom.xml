@@ -1,16 +1,120 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.tcteam.dashboard</groupId>
-    <artifactId>dashboard</artifactId>
-    <version>1.0</version>
-  </parent>
-  <artifactId>dashboard-core</artifactId>
-  <name>dashboard-core</name>
-  <description>dashboard的核心设计</description>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.tcteam.dashboard</groupId>
+		<artifactId>dashboard</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>dashboard-core</artifactId>
+	<name>dashboard-core</name>
+	<description>dashboard的核心设计</description>
+	<packaging>war</packaging>
+
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-  
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		
+		<dependency>
+		<groupId>com.tcteam.dashboard</groupId>
+		<artifactId>dashboard-ui</artifactId>
+		<version>1.0</version>
+		<type>war</type>
+	</dependency>
+</dependencies>
+	
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<plugins>
+		
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+				<configuration>
+					<port>8080</port>
+					<path>/dashboard</path>
+					<uriEncoding>UTF-8</uriEncoding>
+					<server>tomcat7</server>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.10</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<attachClasses>true</attachClasses>
+					<encoding>utf-8</encoding>
+					<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+					<overlays>
+						<overlay>
+							<groupId>com.tcteam.dashboard</groupId>
+							<artifactId>dashboard-ui</artifactId>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+
 </project>

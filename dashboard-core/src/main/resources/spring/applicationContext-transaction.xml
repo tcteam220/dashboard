@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<!--通过AOP配置提供事务增强，让service包下所有Bean的所有方法拥有事务 -->
+	<!-- 通知 -->
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			传播行为
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="count*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="list*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice> -->
+	<!-- aop -->
+	<!-- <aop:config>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.anjubao.framework.service.impl.*.*(..))"/> 
+			execution(* *..*Service.*(..))
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* com.*.service.impl.*.*(..))" />
+	</aop:config> -->
+	<aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true" />
+</beans>
